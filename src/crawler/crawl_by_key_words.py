@@ -1,11 +1,7 @@
 from crawler import extract_tweets, get_username, save_data
 import tweepy as tw
 from utils import calculate_date
-from configuration import get_config
 import copy
-
-
-ARGS = get_config()
 
 
 class CrawlKeyWords:
@@ -54,8 +50,3 @@ class CrawlKeyWords:
             self.user_names = user_names
             if self.args.save_users:
                 save_data(user_names, key_words, self.args.root_dir, start_date, end_date, data_name="users")
-
-
-if __name__ == '__main__':
-    MCLASS = CrawlKeyWords(ARGS)
-    MCLASS.work_flow(["بورس", "اقتصاد"])
