@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from utils import is_item_exist
 
 
 def extract_tweets(crawled_tweets):
@@ -39,3 +40,30 @@ def save_data(data, key_words, root_dir, start_date, end_date, data_name):
     for extracted_data, key_word in zip(data, key_words):
         data_frame = pd.DataFrame({data_name: extracted_data})
         data_frame.to_csv(os.path.join(path, f"{data_name}_{key_word}.csv"), index=False)
+
+
+def is_tweet_valid(tweet: str, key_words: list) -> bool:
+    """
+
+    :param tweet: str
+    :param key_words: list
+    :return: bool
+    """
+    for key_word in key_words:
+        if key_word in tweet:
+            return True
+    return False
+
+
+def filter_tweets(tweets: list, key_words: list) -> list:
+    """
+
+    :param tweets: list
+    :param key_words: list
+    :return:
+    """
+    filtered_tweets = list()
+    for tweet in tweets:
+        if is_tweet_valid(tweet, key_words):
+            filtered_tweets.append(tweet)
+    return filtered_tweets
