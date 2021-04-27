@@ -40,3 +40,30 @@ def is_item_exist(data, item) -> bool:
     if item in data:
         return True
     return False
+
+
+def is_tweet_valid(tweet: str, key_words: list) -> bool:
+    """
+
+    :param tweet: str
+    :param key_words: list
+    :return: bool
+    """
+    for key_word in key_words:
+        if key_word in tweet:
+            return True
+    return False
+
+
+def filter_tweets(tweets: list, key_words: list) -> list:
+    """
+
+    :param tweets: list
+    :param key_words: list
+    :return:
+    """
+    filtered_tweets = list()
+    for tweet in tweets:
+        if is_tweet_valid(tweet, key_words):
+            filtered_tweets.append(tweet)
+    return filtered_tweets
