@@ -30,7 +30,7 @@ def process_time(start_time: float, end_time: float) -> [int, int]:
     return elapsed_mins, elapsed_secs
 
 
-def is_exist(data, item) -> bool:
+def is_item_exist(data, item) -> bool:
     """
 
     :param data:
