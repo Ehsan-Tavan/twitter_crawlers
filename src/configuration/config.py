@@ -6,6 +6,9 @@ def get_config():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root_dir", default=Path(__file__).parents[2].__str__() +
                                               "/data/crawl_data", type=str)
+    parser.add_argument("--key_words_extract_users", default=Path(__file__).parents[2].__str__() +
+                                              "/data/key_words/key_words_extract_users.csv", type=str)
+    parser.add_argument("--key_words_headers", default="key_words", type=str)
 
     parser.add_argument("--consumer_key", default="2HDll0TMxCjWjhm7QAVihCRvq", type=str)
     parser.add_argument("--consumer_secret", default="gctVK1YRJK4TMIuURtMAS6NhOqlkcbPkVzEoU5PuZMVhf9NYSc",
