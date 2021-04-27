@@ -28,3 +28,15 @@ def process_time(start_time: float, end_time: float) -> [int, int]:
     elapsed_mins = int(elapsed_time // 60)
     elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
     return elapsed_mins, elapsed_secs
+
+
+def is_exist(data, item) -> bool:
+    """
+
+    :param data:
+    :param item:
+    :return:
+    """
+    if item in data:
+        return True
+    return False
