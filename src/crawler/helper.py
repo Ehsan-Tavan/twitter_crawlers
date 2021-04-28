@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-from utils import is_item_exist
 
 
 def extract_tweets(crawled_tweets):
@@ -25,18 +24,19 @@ def create_folder(root_dir, start_date, end_date):
     return path
 
 
-def save_data(data, key_words, root_dir, start_date, end_date, data_name):
+def save_data(data, key_words, data_dir, crawl_dir, start_date, end_date, data_name):
     """
 
     :param data:
     :param key_words:
-    :param root_dir:
+    :param data_dir:
+    :param crawl_dir
     :param start_date:
     :param end_date:
     :param data_name:
     :return:
     """
-    path = create_folder(root_dir, start_date, end_date)
+    dir_path = create_folder(os.path.join(data_dir, crawl_dir), start_date, end_date)
     for extracted_data, key_word in zip(data, key_words):
         data_frame = pd.DataFrame({data_name: extracted_data})
-        data_frame.to_csv(os.path.join(path, f"{data_name}_{key_word}.csv"), index=False)
+        data_frame.to_csv(os.path.join(dir_path, f"{data_name}_{key_word}.csv"), index=False)
