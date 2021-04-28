@@ -4,49 +4,40 @@ from pathlib import Path
 
 def get_config():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root_dir", default=Path(__file__).parents[2].__str__() +
-                                              "/data/crawl_data", type=str)
-    parser.add_argument("--key_words_extract_users", default=Path(__file__).parents[2].__str__() +
-                                                             "/data/key_words/key_words_extract_users.csv", type=str)
-    parser.add_argument("--filter_key_words", default=Path(__file__).parents[2].__str__() +
-                                                             "/data/key_words/filter_key_words.csv", type=str)
-    parser.add_argument("--users_tweets", default=Path(__file__).parents[2].__str__() +
-                                                             "/data/users_tweets", type=str)
+    parser.add_argument("--data_dir", type=str,
+                        default=Path(__file__).parents[2].__str__() + "/data")
+    parser.add_argument("--key_words_path", type=str,
+                        default="/key_words/key_words_extract_users.csv")
+    parser.add_argument("--filter_key_words_path", type=str,
+                        default="/key_words/filter_key_words.csv")
+    parser.add_argument("--users_tweets_dir", type=str,
+                        default="/users_tweets")
+    parser.add_argument("--final_tweets_path", type=str,
+                        default="/final_tweets/final_tweets.csv")
 
-    parser.add_argument("--final_tweets", default=Path(__file__).parents[2].__str__() +
-                                                             "/data/final_tweets/final_tweets.csv", type=str)
+    parser.add_argument("--key_words_headers", type=str, default="key_words")
+    parser.add_argument("--filter_key_words_headers", type=str, default="key_words")
 
-    parser.add_argument("--key_words_headers", default="key_words", type=str)
-    parser.add_argument("--filter_key_words_headers", default="key_words", type=str)
+    parser.add_argument("--consumer_key", type=str,
+                        default="")
+    parser.add_argument("--consumer_secret", type=str,
+                        default="")
+    parser.add_argument("--access_token", type=str,
+                        default="")
+    parser.add_argument("--access_token_secret", type=str,
+                        default="")
 
-    parser.add_argument("--consumer_key", default="2HDll0TMxCjWjhm7QAVihCRvq", type=str)
-    parser.add_argument("--consumer_secret", default="gctVK1YRJK4TMIuURtMAS6NhOqlkcbPkVzEoU5PuZMVhf9NYSc",
-                        type=str)
-    parser.add_argument("--access_token", default="1008098850958176257-XboDX2szcJT94pXyUw9kwRym6CwsFr",
-                        type=str)
-    parser.add_argument("--access_token_secret", default="nEaa91mWTE58PaxlsmlOK0g7dam7vjdPJYHpDQm4A9xoJ",
-                        type=str)
+    parser.add_argument("--days", type=int, default=7)
+    parser.add_argument("--num_tweets", type=int, default=10)
 
-    parser.add_argument("--days", default=7,
-                        type=int)
-    parser.add_argument("--num_tweets", default=20,
-                        type=int)
+    parser.add_argument("--extract_text", type=bool, default=True)
+    parser.add_argument("--save_text", type=bool, default=True)
+    parser.add_argument("--extract_users", type=bool, default=True)
+    parser.add_argument("--save_users", type=bool, default=True)
+    parser.add_argument("--save_users_tweets", type=bool, default=True)
 
-    parser.add_argument("--extract_text", default=True,
-                        type=bool)
-    parser.add_argument("--save_text", default=True,
-                        type=bool)
-    parser.add_argument("--extract_users", default=True,
-                        type=bool)
-    parser.add_argument("--save_users", default=True,
-                        type=bool)
-    parser.add_argument("--save_users_tweets", default=True,
-                        type=bool)
-
-    parser.add_argument("--start_date", default="2019-12-22",
-                        type=str)
-    parser.add_argument("--end_date", default="2020-07-22",
-                        type=str)
+    parser.add_argument("--start_date", type=str, default="2019-12-22")
+    parser.add_argument("--end_date", type=str, default="2020-07-22")
 
     args = parser.parse_args()
     return args
