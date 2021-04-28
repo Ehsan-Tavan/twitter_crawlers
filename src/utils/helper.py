@@ -70,12 +70,16 @@ def filter_tweets(tweets: list, key_words: list) -> list:
     return filtered_tweets
 
 
-def save_tweets(tweets: list, path: str) -> None:
+def save_tweets(filtered_tweets: list, path: str) -> None:
     """
 
-    :param tweets: list
+    :param filtered_tweets: list
     :param path: str
     :return: None
     """
-    data_frame = pd.DataFrame({"tweets": tweets})
+    final_tweets = list()
+    for tweets in filtered_tweets:
+        for tweet in tweets:
+            final_tweets.append(tweet)
+    data_frame = pd.DataFrame({"tweets": final_tweets})
     data_frame.to_csv(path, index=False)
