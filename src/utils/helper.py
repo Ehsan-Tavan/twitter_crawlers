@@ -1,4 +1,5 @@
 import datetime
+import pandas as pd
 
 
 def calculate_date(days: int) -> [str, str]:
@@ -67,3 +68,14 @@ def filter_tweets(tweets: list, key_words: list) -> list:
         if is_tweet_valid(tweet, key_words):
             filtered_tweets.append(tweet)
     return filtered_tweets
+
+
+def save_tweets(tweets: list, path: str) -> None:
+    """
+
+    :param tweets: list
+    :param path: str
+    :return: None
+    """
+    data_frame = pd.DataFrame({"tweets": tweets})
+    data_frame.to_csv(path, index=False)
