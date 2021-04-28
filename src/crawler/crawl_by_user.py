@@ -45,7 +45,7 @@ class CrawlUserTweets:
         remove_indexes = [index for index, row in out_df.iterrows() if len(row["reply_to"]) != 1]
         out_df = out_df.drop(remove_indexes)
         out_df = out_df.drop(columns=["reply_to"])
-        out_df.to_csv(os.path.join(self.args.users_tweets, f"{user_name}.pkl"))
+        out_df.to_csv(os.path.join(self.args.data_dir, self.args.users_tweets_dir, f"{user_name}.pkl"))
 
     def work_flow(self, user: str) -> None:
         """
