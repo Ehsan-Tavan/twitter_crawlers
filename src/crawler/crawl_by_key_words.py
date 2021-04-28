@@ -35,7 +35,12 @@ class CrawlKeyWords:
                            until=end_date).items(self.args.num_tweets)
         return tweets
 
-    def work_flow(self, key_words):
+    def work_flow(self, key_words: list) -> None:
+        """
+
+        :param key_words: list
+        :return: None
+        """
         twitter_api = self.set_twitter_api()
         start_date, end_date = calculate_date(days=self.args.days)
         data = [self.crawl_key_word(key_word, twitter_api, start_date, end_date) for key_word in key_words]
@@ -43,10 +48,12 @@ class CrawlKeyWords:
         if self.args.extract_text:
             tweets = [extract_tweets(key_word_data) for key_word_data in data]
             if self.args.save_text:
-                save_data(tweets, key_words, self.args.root_dir, start_date, end_date, data_name="tweets")
+                save_data(tweets, key_words, self.args.data_dir, self.args.crawl_dir,
+                          start_date, end_date, data_name="tweets")
 
         if self.args.extract_users:
             user_names = [get_username(key_word_data) for key_word_data in data2]
             self.user_names = user_names
             if self.args.save_users:
-                save_data(user_names, key_words, self.args.root_dir, start_date, end_date, data_name="users")
+                save_data(user_names, key_words, self.args.root_dir, self.args.data_dir,
+                          start_date, end_date, data_name="users")
