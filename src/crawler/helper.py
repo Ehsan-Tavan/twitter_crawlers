@@ -40,3 +40,16 @@ def save_data(data, key_words, data_dir, crawl_dir, start_date, end_date, data_n
     for extracted_data, key_word in zip(data, key_words):
         data_frame = pd.DataFrame({data_name: list(extracted_data)})
         data_frame.to_csv(os.path.join(dir_path, f"{data_name}_{key_word}.csv"), index=False)
+
+
+def load_saved_users(args) -> list:
+    """
+
+    :param args:
+    :return: list
+    """
+    data_frame = pd.read_csv(os.path.join(args.data_dir,
+                                          args.users_tweets_dir,
+                                          args.users_file),
+                             header=None)
+    return list(data_frame[0])
