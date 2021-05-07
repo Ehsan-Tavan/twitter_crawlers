@@ -24,6 +24,10 @@ def get_config():
                         default="users_tweets",
                         help="Directory name for save each user's tweets")
 
+    parser.add_argument("--users_file", type=str,
+                        default="users_tweets",
+                        help="csv file to save users whose tweets have been saved.")
+
     parser.add_argument("--final_tweets_path", type=str,
                         default="final_tweets/final_tweets.csv",
                         help="Path of csv file to save final filtered tweets")
