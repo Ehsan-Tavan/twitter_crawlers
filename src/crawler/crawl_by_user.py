@@ -1,5 +1,6 @@
 import os
 import twint
+import pandas as pd
 
 
 class CrawlUserTweets:
@@ -47,6 +48,19 @@ class CrawlUserTweets:
         out_df = out_df.drop(columns=["reply_to"])
         out_df.to_csv(os.path.join(self.args.data_dir, self.args.users_tweets_dir, f"{user_name}.pkl"))
 
+    def save_username_in_csv(self, user: str) -> None:
+        """
+
+        :param user: str
+        :return: None
+        """
+        data_frame = pd.DataFrame()
+        data_frame["user"] = [user]
+        data_frame.to_csv(os.path.join(self.args.data_dir,
+                                       self.args.users_tweets_dir,
+                                       self.args.users_file),
+                          index=False, header=False, mode="a")
+
     def work_flow(self, user: str) -> None:
         """
 
@@ -57,3 +71,4 @@ class CrawlUserTweets:
         self.crawled_data = self.crawl_user_tweets()
         if self.args.save_users_tweets:
             self.save_tweets(self.crawled_data, user)
+            self.save_username_in_csv(user)
