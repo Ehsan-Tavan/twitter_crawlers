@@ -1,6 +1,9 @@
 import os
 import twint
 import pandas as pd
+from datetime import date
+
+today = date.today()
 
 
 class CrawlUserTweets:
@@ -56,6 +59,7 @@ class CrawlUserTweets:
         """
         data_frame = pd.DataFrame()
         data_frame["user"] = [user]
+        data_frame["date"] = [today.strftime("%b-%d-%Y")]
         data_frame.to_csv(os.path.join(self.args.data_dir,
                                        self.args.users_tweets_dir,
                                        self.args.users_file),
