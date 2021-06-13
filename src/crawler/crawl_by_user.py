@@ -36,7 +36,7 @@ class CrawlUserTweets:
         :return:
         """
         twint.run.Search(self.config)
-        out_df = twint.output.panda.Tweets_df[["tweet", "hashtags", "retweet", "reply_to"]]
+        out_df = twint.output.panda.Tweets_df[["tweet", "date", "hashtags", "retweet", "reply_to"]]
         return out_df
 
     def save_tweets(self, out_df, user_name):
