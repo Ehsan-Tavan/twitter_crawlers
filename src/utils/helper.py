@@ -56,30 +56,28 @@ def is_tweet_valid(tweet: str, key_words: list) -> bool:
     return False
 
 
-def filter_tweets(tweets: list, key_words: list) -> list:
+def filter_tweets(tweets: list, dates: list, key_words: list) -> [list, list]:
     """
 
     :param tweets: list
-    :param key_words: list
+    :param dates: list
+    :param key_words: lis
     :return:
     """
-    filtered_tweets = list()
-    for tweet in tweets:
-        if is_tweet_valid(tweet, key_words):
-            filtered_tweets.append(tweet)
-    return filtered_tweets
+    for i in range(len(tweets)):
+        if not is_tweet_valid(tweets[i], key_words):
+            tweets[i] = None
+            dates[i] = None
+    return tweets, dates
 
 
-def save_tweets(filtered_tweets: list, path: str) -> None:
+def save_tweets(tweets: list, dates: list, path: str) -> None:
     """
 
-    :param filtered_tweets: list
+    :param tweets: list
+    :param dates: list
     :param path: str
     :return: None
     """
-    final_tweets = list()
-    for tweets in filtered_tweets:
-        for tweet in tweets:
-            final_tweets.append(tweet)
-    data_frame = pd.DataFrame({"tweets": final_tweets})
+    data_frame = pd.DataFrame({"tweets": tweets, "date": dates})
     data_frame.to_csv(path, index=False)
