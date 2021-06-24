@@ -20,18 +20,22 @@ def main():
 
     crawled_users = load_saved_users(ARGS)
 
-    filtered_tweets = list()
+    tweets = list()
+    dates = list()
     for users in user_names:
         for user in users:
             if user not in crawled_users:
                 try:
                     crawl_user_tweets.work_flow(user)
                     tweets = crawl_user_tweets.crawled_data["tweet"]
-                    filtered_tweets.append(filter_tweets(tweets, filtered_key_words))
+                    dates = crawl_user_tweets.crawled_data["date"]
+                    tweets, dates = filter_tweets(tweets, dates, filtered_key_words)
+                    tweets = list(filter(None, tweets))
+                    dates = list(filter(None, dates,))
                 except Exception as e:
                     print(e)
 
-    save_tweets(filtered_tweets, os.path.join(ARGS.data_dir, ARGS.final_tweets_path))
+    save_tweets(tweets, dates, os.path.join(ARGS.data_dir, ARGS.final_tweets_path))
 
 
 if __name__ == "__main__":
